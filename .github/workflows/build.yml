@@ -9,12 +9,17 @@ jobs:
   steps:
    - uses: actions/checkout@v2
    - uses: actions/setup-go@v3
-     env:
-        key: sex
      with:
       go-version: 1.18
    - run: |
        go build -v
-       echo "hello from abdo $key"
-       
+       echo 'hello from abdo'
+ docker_build:
+    runs-on: ubuntu-latest
+    needs: build 
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: docker build . -t abdo_image
+
    
